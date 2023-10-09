@@ -1,0 +1,25 @@
+import Graphics.UI.Gtk
+
+main :: IO ()
+main = do
+  -- Inicializa GTK
+  initGUI
+
+  -- Crea una nueva ventana
+  window <- windowNew
+  set window [windowTitle := "Interfaz Gráfica en Haskell", containerBorderWidth := 10]
+
+  -- Crea una etiqueta
+  label <- labelNew (Just "¡Hola, Mundo!")
+
+  -- Agrega la etiqueta a la ventana
+  containerAdd window label
+
+  -- Configura el manejador de eventos para cerrar la aplicación cuando se cierra la ventana
+  on window deleteEvent $ liftIO mainQuit >> return False
+
+  -- Muestra todos los widgets en la ventana
+  widgetShowAll window
+
+  -- Inicia el bucle principal de eventos de GTK
+  mainGUI
